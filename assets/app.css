@@ -1,0 +1,418 @@
+body{
+    background-color: blueviolet;
+}
+
+#acceuil{
+    margin-top: 20%;
+    margin-bottom: 30%;
+}
+#input_prenom{
+    margin-top: 10px;
+    size: 50px;
+}
+
+.consigne{
+    margin: 0;
+}
+
+#btn_letter{
+    margin-right: 5px;
+}
+
+#letter, #number {
+    font-size: 14em;
+    border: black solid 1px;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 0;
+    box-shadow: 10px 10px 10px black;
+    background-color: greenyellow;
+    width: 345px;
+}
+
+#letter:hover, #number:hover{
+    cursor: pointer;
+    background-color: coral;
+}
+
+#saisie_letter, #saisie_num{
+    font-size: 30px;
+    text-align: center;
+}
+
+#success, #error{
+    font-size: 1.7em;
+}
+
+#success{
+    color: greenyellow;
+}
+
+#error{
+    color: orangered;
+}
+
+#img_success{
+    margin-bottom: 15%;
+}
+
+.lien{
+    display: flex;
+}
+
+#lien{
+    display: block;
+    margin: 0 auto;
+}
+
+/*ipad*/
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait){
+
+    #acceuil{
+        margin-top: 100%;
+    }
+
+    #acceuil h1{
+        font-size: 100px;
+    }
+
+    #input_prenom{
+        margin-top: 5%;
+        font-size: 50px;
+    }
+
+    #prenom{
+        margin-top: 10%;
+        font-size: 6em;
+    }
+
+    #consigne{
+        margin-top: 5%;
+        font-size: 18em;
+    }
+
+    #letter, #number {
+        font-size: 15em;
+        border: black solid 1px;
+        border-radius: 10px;
+        margin: 5% auto;
+        padding: 0;
+        box-shadow: 10px 10px 10px black;
+        background-color: greenyellow;
+        width: 100%;
+    }
+
+    #img_success{
+        margin-bottom: 2%;
+        width: 80%;
+        height: 80%;
+    }
+
+    #img_error{
+        width: 27%;
+    }
+
+    #success, #error{
+        font-size: 3em;
+    }
+
+    #saisie_letter, #saisie_num{
+        font-size: 60px;
+        text-align: center;
+    }
+
+    #btn_letter, #btn_number{
+        display: block;
+        font-size: 3em;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape){
+    #acceuil{
+        margin-top: 20%;
+        margin-bottom: 30%;
+    }
+
+    #acceuil h1{
+        font-size: 70px;
+    }
+
+    #input_prenom{
+        font-size: 30px;
+    }
+
+    #prenom{
+        margin-top: 5%;
+        font-size: 4em;
+    }
+
+    #consigne{
+        font-size: 1.3em;
+    }
+
+    #letter, #number {
+        font-size: 15em;
+    }
+
+    #img_success{
+        margin-bottom: 20%;
+        width: 80%;
+    }
+
+    #img_error{
+        width: 30%;
+    }
+
+    #saisie_letter, #saisie_num{
+        margin-top: 2%;
+        font-size: 30px;
+    }
+
+    #btn_letter, #btn_number{
+        font-size: 1.3em;
+        max-width: 20%;
+    }
+}
+
+/*iphoneX +*/
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait){
+
+    #acceuil{
+        margin-top: 100%;
+    }
+
+    #acceuil h1{
+        font-size: 100px;
+    }
+
+    #input_prenom{
+        margin-top: 5%;
+        font-size: 50px;
+    }
+
+    #prenom{
+        margin-top: 10%;
+        font-size: 7em;
+    }
+
+    #consigne{
+        margin-top: 5%;
+        font-size: 3em;
+    }
+
+    #letter, #number {
+        font-size: 29em;
+        border: black solid 1px;
+        border-radius: 10px;
+        margin: 5% auto;
+        padding: 0;
+        box-shadow: 10px 10px 10px black;
+        background-color: greenyellow;
+        width: 100%;
+    }
+
+    #img_success{
+        margin-bottom: 20%;
+        width: 90%;
+        height: 90%;
+    }
+
+    #img_error{
+        width: 27%;
+    }
+
+    #success, #error{
+        font-size: 3em;
+    }
+
+    #saisie_letter, #saisie_num{
+        font-size: 50px;
+        text-align: center;
+    }
+
+    #btn_letter, #btn_number{
+        display: block;
+        font-size: 3em;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+}
+
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape){
+
+    #acceuil{
+        margin-top: 15%;
+        margin-bottom: 30%;
+    }
+
+    #acceuil h1{
+        font-size: 70px;
+    }
+
+    #input_prenom{
+        font-size: 30px;
+    }
+
+    #prenom{
+        font-size: 4em;
+    }
+
+    #consigne{
+        font-size: 1.3em;
+    }
+
+    #letter, #number {
+        font-size: 3em;
+    }
+
+    #img_success{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 40%;
+    }
+
+    #img_error{
+        width: 15%;
+    }
+
+    #saisie_letter, #saisie_num{
+        font-size: 25px;
+    }
+
+}
+
+/*samsung*/
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait){
+
+    #acceuil{
+        margin-top: 100%;
+    }
+
+    #acceuil h1{
+        font-size: 100px;
+    }
+
+    #input_prenom{
+        margin-top: 5%;
+        font-size: 50px;
+    }
+
+    #prenom{
+        margin-top: 10%;
+        font-size: 7em;
+    }
+
+    #consigne{
+        margin-top: 5%;
+        font-size: 2.5em;
+    }
+
+    #letter, #number {
+        font-size: 29em;
+        border: black solid 1px;
+        border-radius: 10px;
+        margin: 5% auto;
+        padding: 0;
+        box-shadow: 10px 10px 10px black;
+        background-color: greenyellow;
+        width: 100%;
+    }
+
+    #img_success{
+        margin-bottom: 20%;
+        width: 90%;
+        height: 90%;
+    }
+
+    #img_error{
+        width: 27%;
+    }
+
+    #success, #error{
+        font-size: 3em;
+    }
+
+    #saisie_letter, #saisie_num{
+        font-size: 50px;
+        text-align: center;
+    }
+
+    #btn_letter, #btn_number{
+        display: block;
+        font-size: 3em;
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+}
+
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape){
+
+    #acceuil{
+        margin-top: 20%;
+        margin-bottom: 30%;
+    }
+
+    #acceuil h1{
+        font-size: 70px;
+    }
+
+    #input_prenom{
+        font-size: 30px;
+    }
+
+    #prenom{
+        margin-top: 5%;
+        font-size: 4em;
+    }
+
+    #consigne{
+        font-size: 1.3em;
+    }
+
+    #letter, #number {
+        font-size: 3em;
+    }
+
+    #img_success{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 40%;
+    }
+
+    #img_error{
+        width: 15%;
+    }
+
+    #saisie_letter, #saisie_num{
+        font-size: 25px;
+    }
+
+}
+

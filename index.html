@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/app.css">
+    <title>Les chiffres et les lettres</title>
+</head>
+<body>
+<div class="container text-center" id="corps">
+    <!--<div id="acceuil">
+        <h1>BONJOUR</h1>
+        <input class="text-center" id="input_prenom" type="text" placeholder="Ecris ton prénom ici !">
+    </div>-->
+    <h1 id="prenom"></h1>
+    <div id="consigne" style="display: none">
+        <p class="consigne"> Lis à haute voix, écris le chiffre ou la lettre que tu vois sur papier !</p>
+        <p class="consigne"> Si tu veux, tu peux aussi le marquer en dessous et appuyer sur entrée. </p>
+        <p class="consigne"> Pour de l'aide clique sur la lettre.</p>
+    </div>
+    <div id="letter" style="display: none"></div>
+    <div id="number" style="display: none"></div>
+    <audio id="sound" src="" hidden></audio>
+    <h5 class="mt-3" id="success" style="display: none">BRAVO TU AS REUSSI !!!</h5>
+    <h5 class="mt-3" id="error" style="display: none">Essaie encore !</h5>
+    <input class="mt-3" type="number" id="saisie_num" style="display: none" placeholder="Quel est le chiffre ?">
+    <input class="mt-3" type="text" id="saisie_letter" style="display: none" placeholder="Quelle est la lettre ?">
+</div>
+    <div class="lien">
+        <a class="btn btn-warning mt-2" id="lien" href="prenoms.html" role="button">Les Prénoms</a>
+    </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
