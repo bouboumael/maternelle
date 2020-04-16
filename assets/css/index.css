@@ -1,0 +1,21 @@
+body{
+    background-color: blueviolet;
+}
+
+h1{
+    text-align: center;
+}
+
+table{
+    text-align: center;
+}
+
+#acceuil{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.btn-game{
+    width: 100%;
+}

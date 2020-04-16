@@ -1,11 +1,11 @@
 Bonjour,
 
-Afin d'adapter les prénoms de votre classe à cette application, veuillez ouvrir le fichier "prenoms.txt" puis :
+Afin d'adapter les prénoms de votre classe à cette application, veuillez :
 
-	1) Ouvrez le fichier "prenoms.txt"
-	2) Supprimez tous les prénoms de la classe de base.
-	3) Notez les prénoms en revenant à la ligne pour chaque éleve
-	4) Enregistrez le fichier
-	5) Fermez le fichier
+	1) Ouvrir le fichier "prenoms.txt"
+	2) Supprimer tous les prénoms de la classe de base.
+	3) Noter les prénoms en revenant à la ligne pour chaque éleve
+	4) Enregistrer le fichier
+	5) Fermer le fichier
 
-Réactualisez le navigateur le jeu est prêt.
+Pour terminer, réactualisez le navigateur. Le jeu est prêt.
