@@ -23,7 +23,7 @@ $(document).ready(function(){
 //input_prenom.focus();
 
 let test = function() {
-    $('#prenom').text('BONJOUR '/*+ $(input_prenom).val().toUpperCase()*/);
+    $('#prenom').text('Les Chiffres et les lettres'/*+ $(input_prenom).val().toUpperCase()*/);
     //$('#acceuil').hide();
     consigne.css('display', '');
     $(corps).append(`<div id="btn_choix" class="mt-3">${btn_letter}${btn_number}</div>`);

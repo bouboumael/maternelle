@@ -2,12 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>Jeux Ecole Maternelle du Plissay</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/index.css">
-    <title>Jeux Ecole Maternelle du Plissay</title>
 </head>
 <body>
 <div class="container">
@@ -18,23 +17,23 @@
     </div>
     <table class="table">
         <thead>
-        <tr>
+        <tr class="bg-secondary">
             <th scope="col">Jeux</th>
             <th scope="col">Description</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr class="bg-primary">
             <td><a class="btn btn-primary btn-game" href="" role="button" onclick="alert('En cours de création')">Alphabet</a></td>
-            <td>Recherche la lettre de l'alphabet que l'on te montre mais attention tu n'as pas beaucoup de temps</td>
+            <td class="align-middle">Recherche la lettre de l'alphabet que l'on te montre mais attention tu n'as pas beaucoup de temps</td>
         </tr>
-        <tr>
-            <td><a class="btn btn-primary btn-game" href="prenoms.html" role="button">Les Prénoms</a></td>
-            <td>Recompose les prénoms de tes amis de classe</td>
+        <tr class="bg-success">
+            <td><a class="btn btn-success btn-game" href="pages/prenoms.html" role="button">Les Prénoms</a></td>
+            <td class="align-middle">Recompose les prénoms de tes amis de classe</td>
         </tr>
-        <tr>
-            <td><a class="btn btn-primary btn-game" href="chiffres&lettres.html" role="button">Les Chiffres et les Lettres</a></td>
-            <td>Retrouve la lettre ou le chiffre sur le clavier</td>
+        <tr class="bg-warning">
+            <td><a class="btn btn-warning btn-game" href="pages/chiffres&lettres.html" role="button">Les Chiffres et les Lettres</a></td>
+            <td class="align-middle">Retrouve la lettre ou le chiffre sur le clavier</td>
         </tr>
         </tbody>
     </table>
@@ -43,5 +42,7 @@
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
+<script src="assets/js/navbar.js"></script>
+<script src="assets/js/index.js"></script>
 </body>
 </html>
