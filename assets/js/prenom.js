@@ -2,7 +2,7 @@ let grille = document.getElementById('grille-lettre')
 let bouton = document.getElementById('button')
 let prenom = document.getElementById('prenom')
 let resultat = document.getElementById('resultat')
-let success = document.getElementById('success')
+let sucses = document.getElementById('success')
 let eleve = []
 let eleves = lire_fichier()
 
@@ -14,8 +14,8 @@ row()
 resultat.innerHTML = trait(prenom.innerText, false)
 
 bouton.onclick = function () {
-    if (success.style.display === 'block'){
-        success.style.display = 'none'
+    if (sucses.style.display === 'block'){
+        sucses.style.display = 'none'
         resultat.style.display = 'block'
     }
     let elements = document.querySelectorAll('.ligne-lettre');
@@ -179,7 +179,7 @@ function validation(p) {
     let l = document.getElementsByClassName('lettre')
     let result = resultat.innerText.replace(/ /gi, '').split("")
     if(result.indexOf('_') === -1) {
-        success.style.display = 'block'
+        sucses.style.display = 'block'
         resultat.style.display = 'none'
         for (let i = 0; i < l.length; i++){
             l[i].removeAttribute('onclick')
@@ -242,7 +242,7 @@ function addPrenom(p){
         }
 
         if (nb > 1){
-           nb = nb -1
+            nb = nb -1
         }else if (nb === 1){
             nb = 0
         }

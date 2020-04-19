@@ -56,15 +56,6 @@ body{
     margin-bottom: 15%;
 }
 
-.lien{
-    display: flex;
-}
-
-#lien{
-    display: block;
-    margin: 0 auto;
-}
-
 /*ipad*/
 @media only screen
 and (min-device-width : 768px)

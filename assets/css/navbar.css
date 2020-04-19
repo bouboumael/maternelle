@@ -1,6 +1,22 @@
 .navbar{
-    height: 5%;
     background: linear-gradient(to right, #33FFBE, white);
     border: 2px none black;
     border-bottom-style: solid;
+}
+
+.btn-acceuil, .btn-acceuil:hover, .btn-nav, .btn-nav:hover{
+    border: solid 1px black;
+    box-shadow: 2px 2px 2px black;
+}
+
+.btn-acceuil{
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.btn-nav{
+    min-width: 200px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
 }
