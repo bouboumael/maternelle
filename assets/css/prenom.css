@@ -1,5 +1,6 @@
 body{
     background-color: darkseagreen;
+    user-select:none;
 }
 
 h1{
@@ -40,7 +41,6 @@ p{
     font-size: 35px;
     text-align: center;
     overflow-wrap: break-word;
-    user-select:none;
 }
 
 .lettre:hover{
@@ -98,4 +98,70 @@ p{
 
 #suivant button, #lien {
     margin: 0 auto;
+}
+
+/*ipad*/
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait){
+
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape){
+
+}
+
+/*iphoneX +*/
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait){
+
+}
+
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape){
+
+}
+
+/*iphone 6/7/8 */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait){
+
+}
+
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape){
+
+}
+
+/*samsung*/
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait){
+
+}
+
+@media only screen
+and (min-device-width: 360px)
+and (max-device-width: 640px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape){
+
 }

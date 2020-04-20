@@ -9,8 +9,8 @@ let saisieLetter = $('#saisie_letter');
 let saisieNum = $('#saisie_num');
 let success = $('#success');
 let error = $('#error');
-let smileyS = '<img id="img_success" src="images/success3.png" alt="">';
-let smileyE = '<img id="img_error" src="images/error1.png" alt="">';
+let smileyS = '<img id="img_success" src="../images/success3.png" alt="">';
+let smileyE = '<img id="img_error" src="../images/error1.png" alt="">';
 let num = [];
 let alphabet = [];
 
