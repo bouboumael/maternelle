@@ -179,7 +179,7 @@ function isMobileDevice() {
 }
 
 function sound(i) {
-    let rep = 'sounds/';
+    let rep = '../sounds/';
     let extense = '.mp3';
     return rep + i + extense;
 }
