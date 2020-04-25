@@ -1,3 +1,4 @@
+import Alphabet from "./Class/Alphabet.js"
 let snail = document.getElementById('snail')
 let route = document.getElementById('route')
 let course = document.getElementById('course')
@@ -16,11 +17,38 @@ let debut
 let start = false
 let reduct
 
+
 //redimenssionement des elements avec la taille de la fenètre
 window.onresize = function () {
     debut = (course.clientWidth-route.clientWidth)/2
     snail.style.left = positionLeft('snail')
     laitue.style.left = positionLeft('laitue')
+}
+
+//action du bouton
+btn_debut.onclick = function(){
+    if (btn_debut.innerText === "C'est parti!"){
+        btn_debut.innerText = "Première partie"
+        course.style.display = 'block'
+        grille_lettre.style.display = 'block'
+    }else{
+        if (start === false){
+            course.style.display = 'block'
+            grille_lettre.style.display = 'block'
+            if (course.style.display === 'block'){
+                timer = setInterval(move, ms)
+            }
+            btn_debut.innerText = 'Lettre suivante'
+        }else{
+            clearInterval(timer)
+            clearInterval(reduct)
+            position = 0
+            snail.style.left = positionLeft('snail')
+            laitue.classList.remove('finish')
+            laitueDimension(true)
+            timer = setInterval(move, ms)
+        }
+    }
 }
 
 //animation du chrono escargot
@@ -57,32 +85,6 @@ function move (){
     }
 }
 
-//action du bouton
-btn_debut.onclick = function(){
-    if (btn_debut.innerText === "C'est parti!"){
-        btn_debut.innerText = "Première partie"
-        course.style.display = 'block'
-        grille_lettre.style.display = 'block'
-    }else{
-        if (start === false){
-            course.style.display = 'block'
-            grille_lettre.style.display = 'block'
-            if (course.style.display === 'block'){
-                timer = setInterval(move, ms)
-            }
-            btn_debut.innerText = 'Lettre suivante'
-        }else{
-            clearInterval(timer)
-            clearInterval(reduct)
-            position = 0
-            snail.style.left = positionLeft('snail')
-            laitue.classList.remove('finish')
-            laitueDimension(true)
-            timer = setInterval(move, ms)
-        }
-    }
-}
-
 //dimenssionnement de la laitue
 function laitueDimension (s){
     if (s !== true){
@@ -114,5 +116,10 @@ function positionLeft(e){
     }
 
     return left
+
+}
+
+//remplissage de la grille des lettres
+function grilles() {
 
 }

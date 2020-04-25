@@ -1,10 +1,17 @@
-let grille = document.getElementById('grille-lettre')
+import Alphabet from "./Class/Alphabet.js";
+import Grille from "./Class/Grille.js";
+import File from "./Class/File.js";
+
+let alphabet = new Alphabet()
+let grille = new Grille()
+let file = new File()
+let grille_lettre = document.getElementById('grille-lettre')
 let bouton = document.getElementById('button')
 let prenom = document.getElementById('prenom')
 let resultat = document.getElementById('resultat')
 let sucses = document.getElementById('success')
 let eleve = []
-let eleves = lire_fichier()
+let eleves = file.lire_fichier('prenoms.txt')
 
 //empèche le clique droit
 document.oncontextmenu = new Function("return false")
@@ -30,6 +37,10 @@ bouton.onclick = function () {
     row()
     resultat.innerHTML = trait(prenom.innerText, false)
 }
+
+grille_lettre.addEventListener('click', function(e){
+        select(e.target)
+})
 
 //non répétition des prénoms à la suite
 function controle(e) {
@@ -69,7 +80,6 @@ function trait(p, m) {
                 r = r + p[i] + ' '
             }
         }
-
         return r
     }
 
@@ -78,7 +88,7 @@ function trait(p, m) {
 //Actions quand click sur lettre de la grille
 function select(e) {
     let classDiv = e.classList;
-    if (sansAccent(prenom.innerText.toLowerCase()).split("").indexOf(e.innerText.toLowerCase()) !== -1) {
+    if (alphabet.sansAccent(prenom.innerText.toLowerCase()).split("").indexOf(e.innerText.toLowerCase()) !== -1) {
         if (classDiv.contains('selected') === true){
             classDiv.remove('selected');
         }else{
@@ -89,7 +99,6 @@ function select(e) {
         setTimeout(function(){
             classDiv.remove('error');
         }, 2000)
-
     }
     controleLettre(e.innerText, e.getAttribute('id'))
     validation(prenom.innerText)
@@ -101,11 +110,12 @@ function controleLettre(l, id) {
     result = result.split("")
     for (let i = 0; i < prenom.innerText.length; i++){
         if(result[i] === '_'){
-            if (sansAccent(prenom.innerText[i]) === l.toLowerCase()){
+            let lettre = alphabet.sansAccent(prenom.innerText[i])
+            if (lettre === l.toLowerCase()){
                 result[i] = prenom.innerText[i]
                 document.getElementById(id).removeAttribute('onclick')
                 break
-            }else if (sansAccent(prenom.innerText[i]) === l){
+            }else if (lettre === l){
                 result[i] = prenom.innerText[i]
                 document.getElementById(id).removeAttribute('onclick')
                 break
@@ -119,59 +129,10 @@ function controleLettre(l, id) {
     resultat.innerText = trait(p, true)
 }
 
-//mélange de l'alphabet + lettre en plus
-function shuffle(a) {
-    var j = 0;
-    var valI = '';
-    var valJ = valI;
-    var l = a.length - 1;
-    while(l > -1)
-    {
-        j = Math.floor(Math.random() * l);
-        valI = a[l];
-        valJ = a[j];
-        a[l] = valJ;
-        a[j] = valI;
-        l = l - 1;
-    }
-    return a;
-}
-
 //insertion des lettre de l'alphabet dans la grille
 function row() {
-    let alpha = addPrenom(sansAccent(prenom.innerText.toLowerCase()))
-    alpha = alpha.split("");
-    alpha = shuffle(alpha)
-    let nbLigne = Math.ceil(alpha.length/6)
-
-    //créer une ligne
-    let nbId = 1
-    for (let i=1; i<= nbLigne; i++){
-        let element = document.createElement('div');
-        element.setAttribute('class', 'ligne-lettre')
-        element.setAttribute('id', 'row-'+i)
-        grille.appendChild(element)
-
-        // remplir la ligne de 6 lettres
-        let t = 0
-        let ligne = document.getElementById('row-'+i);
-        do {
-            let place = Math.floor(Math.random()*alpha.length)
-            let l = alpha[place];
-            if (l){
-                let lettre = document.createElement('div')
-                lettre.setAttribute('class', 'col-2 lettre')
-                lettre.setAttribute('id', l+'-'+nbId)
-                lettre.setAttribute('onclick', 'select(this)')
-                ligne.appendChild(lettre)
-                let letter = document.getElementById(l+'-'+nbId)
-                letter.innerText = l.toUpperCase()
-                alpha.splice(place,1)
-                nbId++
-            }
-            t++
-        }while (t < 6 )
-    }
+    let alpha = alphabet.shuffle(addPrenom(alphabet.sansAccent(prenom.innerText.toLowerCase())).split(""))
+    grille.fill(alpha,Math.ceil(alpha.length/6),grille_lettre)
 }
 
 //Valide le résultat final
@@ -187,51 +148,9 @@ function validation(p) {
     }
 }
 
-//Elimine les accents des lettres
-function sansAccent (e){
-    let accent = [
-        /[\300-\306]/g, /[\340-\346]/g, // A, a
-        /[\310-\313]/g, /[\350-\353]/g, // E, e
-        /[\314-\317]/g, /[\354-\357]/g, // I, i
-        /[\322-\330]/g, /[\362-\370]/g, // O, o
-        /[\331-\334]/g, /[\371-\374]/g, // U, u
-        /[\321]/g, /[\361]/g, // N, n
-        /[\307]/g, /[\347]/g, // C, c
-    ];
-    let noaccent = ['A','a','E','e','I','i','O','o','U','u','N','n','C','c'];
-
-    let str = e;
-    for(let i = 0; i < accent.length; i++){
-        str = str.replace(accent[i], noaccent[i]);
-    }
-    return str;
-}
-
-//Ajax lecture fichier text
-function lire_fichier() {
-    let prenoms = []
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: "prenoms.txt",
-        error: function (msg) {
-            // message en cas d'erreur :
-            alert("Assurez vous de la présence du fichier prenoms.txt" +
-                "\rVérifiez que ce dernier se nomme exactement prenoms.txt" +
-                "\rErreur type: " +msg);
-        },
-        success: function (data) {
-            data = data.split('\r\n')
-            for (let i = 0; i < data.length; i++){
-                prenoms[i] = data[i]
-            }
-        }
-    })
-    return prenoms
-}
-
+//rajout du prenom daans l'alphabet
 function addPrenom(p){
-    let alpha = 'abcdefghijklmnopqrstuvwxyz'
+    let alpha = alphabet.alpha
     let rajout = ''
     for (let i = 0; i < alpha.length; i++){
         let nb = 0

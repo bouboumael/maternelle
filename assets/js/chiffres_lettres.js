@@ -1,5 +1,6 @@
+import Alphabet from "./Class/Alphabet.js";
+
 let consigne = $('#consigne');
-//let input_prenom = $('#input_prenom');
 let corps = $('#corps');
 let btn_number = "<button class=\"btn btn-primary col-2\" id='btn_number' type=\"button\">Chiffre</button>";
 let btn_letter = "<button class=\"btn btn-success col-2\" id='btn_letter' type=\"button\">Lettre</button>";
@@ -12,7 +13,7 @@ let error = $('#error');
 let smileyS = '<img id="img_success" src="../images/success3.png" alt="">';
 let smileyE = '<img id="img_error" src="../images/error1.png" alt="">';
 let num = [];
-let alphabet = [];
+let alphabet = new Alphabet()
 
 $(document).ready(function(){
     $('input').on('change keyup paste', function(){
@@ -20,14 +21,13 @@ $(document).ready(function(){
     });
 });
 
-//input_prenom.focus();
-
 let test = function() {
-    $('#prenom').text('Les Chiffres et les lettres'/*+ $(input_prenom).val().toUpperCase()*/);
+    $('#prenom').text('Les Chiffres et les lettres');
     //$('#acceuil').hide();
     consigne.css('display', '');
     $(corps).append(`<div id="btn_choix" class="mt-3">${btn_letter}${btn_number}</div>`);
     $("#btn_letter").on("click", function(){
+        let l = alphabet.letter().toUpperCase()
         $("#btn_number").html('Chiffre');
         $("#btn_letter").html('Lettre suivante');
         saisieNum.css('display', 'none');
@@ -40,17 +40,15 @@ let test = function() {
         if (lettre.css('display') === 'none'){
             lettre.css('display', '');
         }
-        if(alphabet.length === 26){
-            alphabet = [];
-        }
-        alphabet = letter(alphabet);
-        $('#sound').attr('src', sound(alphabet[0].toUpperCase()));
+
+        $('#sound').attr('src', sound(l));
         lettre.click(function () {
             if  (success.css('display') === 'none'){
                 $('#sound')[0].play();
             }
         });
-        lettre.text(alphabet[0].toUpperCase());
+
+        lettre.text(l);
         if (saisieLetter.css('display') !== ''){
             saisieLetter.css('display', '');
             if(isMobileDevice()===false){
@@ -110,16 +108,6 @@ function number(n) {
     return n;
 }
 
-function letter(a) {
-    let alpha="abcdefghijklmnopqrstuvwxyz".split("");
-    let l = alpha[Math.floor(Math.random()*26)];
-    while ($.inArray(l, a) !== -1){
-        l = alpha[Math.floor(Math.random()*26)];
-    }
-    a.unshift(l);
-    return a;
-}
-
 function controle(num1, num2){
     return num1 === num2;
 }
@@ -127,7 +115,7 @@ function controle(num1, num2){
 function validate (t){
     if(t === 'letter'){
         $(saisieLetter).change(function () {
-            let control = controle(saisieLetter.val().toLowerCase(), alphabet[0]);
+            let control = controle(saisieLetter.val().toLowerCase(), alphabet.lettre);
             if (control === true) {
                 error.css('display', 'none');
                 success.css('display', '');
@@ -139,7 +127,7 @@ function validate (t){
                 success.css('display', 'none');
                 error.css('display', '');
                 lettre.children($('#img_success')).remove();
-                lettre.text(alphabet[0].toUpperCase());
+                lettre.text(alphabet.lettre.toUpperCase());
                 lettre.append(smileyE);
                 saisieLetter.val('');
             }
