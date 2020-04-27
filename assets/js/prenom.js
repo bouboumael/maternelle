@@ -25,10 +25,7 @@ bouton.onclick = function () {
         sucses.style.display = 'none'
         resultat.style.display = 'block'
     }
-    let elements = document.querySelectorAll('.ligne-lettre');
-    for (let element of elements) {
-        element.remove();
-    }
+    grille.removeLetter()
     let p
     do {
         p = controle(eleves[Math.floor(Math.random()*eleves.length)])
@@ -39,7 +36,10 @@ bouton.onclick = function () {
 }
 
 grille_lettre.addEventListener('click', function(e){
-        select(e.target)
+    let lettreSelect = e.target
+    grille.select(lettreSelect, prenom)
+    controleLettre(lettreSelect.innerText, lettreSelect.getAttribute('id'))
+    validation(prenom.innerText)
 })
 
 //non répétition des prénoms à la suite
@@ -83,25 +83,6 @@ function trait(p, m) {
         return r
     }
 
-}
-
-//Actions quand click sur lettre de la grille
-function select(e) {
-    let classDiv = e.classList;
-    if (alphabet.sansAccent(prenom.innerText.toLowerCase()).split("").indexOf(e.innerText.toLowerCase()) !== -1) {
-        if (classDiv.contains('selected') === true){
-            classDiv.remove('selected');
-        }else{
-            classDiv.add('selected');
-        }
-    }else{
-        classDiv.add('error');
-        setTimeout(function(){
-            classDiv.remove('error');
-        }, 2000)
-    }
-    controleLettre(e.innerText, e.getAttribute('id'))
-    validation(prenom.innerText)
 }
 
 //compléter le prénoms résultat en changeant les traits par les lettres

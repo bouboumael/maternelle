@@ -42,24 +42,71 @@ body{
     width: 100px;
     height: 93px;
     transform: scaleX(-1);
-    position: relative;
+    position: absolute;
     z-index: 2;
-    display: none;
+    visibility: hidden;
 }
 
-#grille-lettre{
+#grille_lettre{
     margin-top: 10px;
+    text-align: center;
     display: none;
 }
 
 #grille{
     margin: 0 auto;
-    background-color: blueviolet;
+    background-color: aqua;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 10px 10px 10px;
-    width: 800px;
-    height: 300px;
+}
+
+.ligne-lettre{
+    display: flex;
+}
+
+.lettre{
+    font-size: 30px;
+    overflow-wrap: break-word;
+}
+
+.lettre:hover{
+    font-size: 28px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px;
+    background-color: greenyellow;
+}
+
+.selected{
+    background-color: green;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px;
+    transition: background-color 0.5s, transform 2s, font-size 2s;
+    transform: rotate(720deg);
+    font-size: 100px;
+    position: absolute;
+    z-index: 4;
+}
+
+.selected:hover{
+    background-color: green;
+    font-size: 100px;
+}
+
+.error{
+    background-color: red;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px;
+    transition: background-color 0.5s;
+}
+
+.error:hover{
+    font-size: 28px;
+    background-color: red;
 }
 
 #debut{
@@ -77,7 +124,7 @@ body{
 #success{
     transition: display 5s;
     text-align: center;
-    font-size: 15em;
+    font-size: 5em;
     display: none;
 }
 

@@ -5,22 +5,6 @@ export default class Alphabet {
         this._tab = [];
     }
 
-    get alpha() {
-        return this._alpha;
-    }
-
-    get tab() {
-        return this._tab;
-    }
-
-    set tab(value) {
-        this._tab = value;
-    }
-
-    get lettre(){
-        return this._tab[0]
-    }
-
     /**
      * créé un tableau de lettre en prenant une lettre au hazard et en le répétant pas
      * puis retourne la lettre rajputée.
@@ -79,6 +63,22 @@ export default class Alphabet {
             l = l - 1;
         }
         return a;
+    }
+
+    get alpha() {
+        return this._alpha;
+    }
+
+    get tab() {
+        return this._tab;
+    }
+
+    set tab(value) {
+        this._tab = value;
+    }
+
+    get lettre(){
+        return this._tab[0]
     }
 
 

@@ -7,13 +7,14 @@ export default class Chrono {
     _timer
     _reduct
 
-    constructor(course, route, snail, laitue) {
+    constructor(course, route, snail, laitue, success) {
         this._course = course
         this._route = route
         this._snail = snail
         this._laitue = laitue
+        this._success = success;
         this._position = 0
-        this._time = 20
+        this._time = 15
         this._ms = 10
     }
 
@@ -51,7 +52,19 @@ export default class Chrono {
         this.position = 0
         this.snail.style.left = this.positionLeft('snail')
         this.laitue.classList.remove('finish')
+        if (this.success.style.display === "block"){
+            this.success.style.display = ''
+            this.course.style.display = 'block'
+        }
         this.laitueDimension(true)
+    }
+
+    /**
+     * affichage perdu
+     */
+    lose(){
+        this.course.style.display = 'none'
+        this.success.style.display = "block"
     }
 
     /**
@@ -64,6 +77,7 @@ export default class Chrono {
         this.course = course
         this.route = route
         this.snail.style.left = this.positionLeft('snail')
+        this.snail.style.top = this.course.offsetTop + ((this.route.height-this.snail.height)/2) + "px"
         this.laitue.style.left = this.positionLeft('laitue')
         this.laitue.style.top = this.course.offsetTop + ((this.route.height-this.laitue.height)/2) + "px"
     }
@@ -73,31 +87,32 @@ export default class Chrono {
      */
     move (){
         if (this.laitue.style.visibility === ""){
-            this.snail.style.top = '-130px'
-            this.laitue.style.visibility = 'visible'
-            this.laitue.style.top = this.course.offsetTop + ((this.route.height-this.laitue.height)/2) + "px"
-            this.laitue.style.left = this.positionLeft('laitue')
+            this.laitueDimension(true)
+            this.snail.style.top = this.course.offsetTop + ((this.route.height-this.snail.height)/2) + "px"
+            this.snail.style.left = this.positionLeft('snail')
+            this.snail.style.visibility = 'visible'
         }
-        if (this.position > this.largeur - (this.snail.clientWidth)){
+        if (this.position > this.largeur - this.snail.clientWidth){
             this.stop()
             this.laitue.classList.add('finish')
             this.reduct = setInterval(function (){
-                if (this.laitue.clientWidth > 1){
+                if (this.laitue.clientWidth > 40){
                     this.laitueDimension(false)
                 }else{
                     clearInterval(this.reduct)
+                    this.lose()
                 }
             }.bind(this),100)
         }else {
-            if (this.snail.style.display === '') {
-                this.snail.style.display = 'block'
-            }
             this.snail.style.left = this.positionLeft('snail')
             this.position = this.position + this.pourcent
         }
     }
 
-    //dimenssionnement de la laitue
+    /**
+     * dimenssionnement de la laitue
+     * @param start
+     */
     laitueDimension (start){
         if (start !== true){
             this.laitue.style.width = (this.laitue.clientWidth - 2)+"px"
@@ -108,6 +123,7 @@ export default class Chrono {
             this.laitue.style.width = '100px'
             this.laitue.style.height = '100px'
             this.laitue.style.opacity = ""
+            this.laitue.style.visibility = 'visible'
             this.laitue.style.top = this.course.offsetTop + ((this.route.height-this.laitue.height)/2) + "px"
             this.laitue.style.left = this.positionLeft('laitue')
         }
@@ -122,7 +138,7 @@ export default class Chrono {
         let left
         switch (e) {
             case 'snail':
-                left = this.debut + this.position+"px"
+                left = this.course.offsetLeft + this.debut + this.position+"px"
                 break
             case 'laitue':
                 left = (this.course.offsetLeft + this.debut + this.route.clientWidth) - this.laitue.clientWidth +"px"
@@ -240,5 +256,11 @@ export default class Chrono {
         this._reduct = value;
     }
 
+    get success() {
+        return this._success;
+    }
 
+    set success(value) {
+        this._success = value;
+    }
 }
