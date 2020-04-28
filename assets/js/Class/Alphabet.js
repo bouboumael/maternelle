@@ -47,7 +47,11 @@ export default class Alphabet {
         return str;
     }
 
-    //mélange de l'alphabet + lettre en plus
+    /**
+     * mélange de l'alphabet + lettre en plus
+     * @param a
+     * @returns {*}
+     */
     shuffle(a) {
         var j = 0;
         var valI = '';

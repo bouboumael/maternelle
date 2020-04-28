@@ -12,6 +12,23 @@ body{
     font-size: 1.5em;
 }
 
+#objectif{
+    display: flex;
+}
+
+#lettre{
+    margin: 0 auto 10px;
+    text-align: center;
+    min-width: 100px;
+    font-size: 50px;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px;
+    background-color: greenyellow;
+    display: none
+;
+}
+
 #course{
     text-align: center;
     height: 177px;
@@ -80,19 +97,19 @@ body{
 }
 
 .selected{
-    background-color: green;
+    background-color: greenyellow;
     border-radius: 20px;
     border: 2px solid black;
     box-shadow: 5px 5px 5px;
-    transition: background-color 0.5s, transform 2s, font-size 2s;
-    transform: rotate(720deg);
+    transition: background-color 0.5s, transform 1.5s, font-size 1.5s;
+    transform: rotate(1440deg);
     font-size: 100px;
     position: absolute;
     z-index: 4;
 }
 
 .selected:hover{
-    background-color: green;
+    background-color: greenyellow;
     font-size: 100px;
 }
 
@@ -124,7 +141,7 @@ body{
 #success{
     transition: display 5s;
     text-align: center;
-    font-size: 5em;
+    font-size: 50px;
     display: none;
 }
 

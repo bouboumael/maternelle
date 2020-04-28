@@ -7,12 +7,13 @@ export default class Chrono {
     _timer
     _reduct
 
-    constructor(course, route, snail, laitue, success) {
+    constructor(course, route, snail, laitue, success, objectif) {
         this._course = course
         this._route = route
         this._snail = snail
         this._laitue = laitue
         this._success = success;
+        this._objectif = objectif;
         this._position = 0
         this._time = 15
         this._ms = 10
@@ -23,7 +24,7 @@ export default class Chrono {
      */
     define(){
         this.largeur = this.route.clientWidth
-        this.distance = this.largeur-100
+        this.distance = this.largeur-this.snail.clientWidth
         this.pourcent = (this.ms*(this.distance/this.time))/1000
         this.debut = (this.course.clientWidth-this.route.clientWidth)/2
     }
@@ -33,14 +34,18 @@ export default class Chrono {
      */
     start(){
         this.define()
+        this.snailTop()
         this.timer = setInterval(this.move.bind(this), this.ms)
     }
 
     /**
      * stop chrono
      */
-    stop(){
+    stop(message){
         clearInterval(this.timer)
+        if (message){
+              this.resultat(message)
+        }
     }
 
     /**
@@ -55,16 +60,19 @@ export default class Chrono {
         if (this.success.style.display === "block"){
             this.success.style.display = ''
             this.course.style.display = 'block'
+            this.objectif.style.display = 'block'
         }
         this.laitueDimension(true)
     }
 
     /**
-     * affichage perdu
+     * affichage fin de partie
      */
-    lose(){
-        this.course.style.display = 'none'
+    resultat(message){
+        this.objectif.style.display = 'none'
         this.success.style.display = "block"
+        this.success.innerText = message
+        this.snailTop()
     }
 
     /**
@@ -77,9 +85,8 @@ export default class Chrono {
         this.course = course
         this.route = route
         this.snail.style.left = this.positionLeft('snail')
-        this.snail.style.top = this.course.offsetTop + ((this.route.height-this.snail.height)/2) + "px"
-        this.laitue.style.left = this.positionLeft('laitue')
-        this.laitue.style.top = this.course.offsetTop + ((this.route.height-this.laitue.height)/2) + "px"
+        this.snailTop()
+        this.laitueDimension(true)
     }
 
     /**
@@ -88,7 +95,6 @@ export default class Chrono {
     move (){
         if (this.laitue.style.visibility === ""){
             this.laitueDimension(true)
-            this.snail.style.top = this.course.offsetTop + ((this.route.height-this.snail.height)/2) + "px"
             this.snail.style.left = this.positionLeft('snail')
             this.snail.style.visibility = 'visible'
         }
@@ -100,10 +106,10 @@ export default class Chrono {
                     this.laitueDimension(false)
                 }else{
                     clearInterval(this.reduct)
-                    this.lose()
+                    this.resultat('PERDU')
                 }
             }.bind(this),100)
-        }else {
+        }else{
             this.snail.style.left = this.positionLeft('snail')
             this.position = this.position + this.pourcent
         }
@@ -130,6 +136,13 @@ export default class Chrono {
     }
 
     /**
+     * positionnement de l'escargot en hauteur
+     */
+    snailTop(){
+        this.snail.style.top = this.course.offsetTop + ((this.route.height-this.snail.height)/2) + "px"
+    }
+
+    /**
      * positionnement des éléments en css left
      * @param e
      * @returns {string}
@@ -150,7 +163,6 @@ export default class Chrono {
         return left
 
     }
-
 
     get course() {
         return this._course;
@@ -262,5 +274,13 @@ export default class Chrono {
 
     set success(value) {
         this._success = value;
+    }
+
+    get objectif() {
+        return this._objectif;
+    }
+
+    set objectif(value) {
+        this._objectif = value;
     }
 }

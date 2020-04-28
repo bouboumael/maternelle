@@ -37,9 +37,12 @@ bouton.onclick = function () {
 
 grille_lettre.addEventListener('click', function(e){
     let lettreSelect = e.target
-    grille.select(lettreSelect, prenom)
-    controleLettre(lettreSelect.innerText, lettreSelect.getAttribute('id'))
-    validation(prenom.innerText)
+    let lettreClass = lettreSelect.classList
+    if (sucses.style.display !== 'block' && !lettreClass.contains('selected')){
+        grille.select(lettreSelect, prenom)
+        controleLettre(lettreSelect.innerText)
+        validation()
+    }
 })
 
 //non répétition des prénoms à la suite
@@ -60,7 +63,7 @@ function controle(e) {
 
 //espace prénom composé
 function trait(p, m) {
-    let r
+    let r = ''
     if (m === false){
         for (let i = 0; i < p.length; i++){
             if (i === 0){
@@ -86,19 +89,14 @@ function trait(p, m) {
 }
 
 //compléter le prénoms résultat en changeant les traits par les lettres
-function controleLettre(l, id) {
+function controleLettre(l) {
     let result = resultat.innerText.replace(/ /gi, '')
     result = result.split("")
     for (let i = 0; i < prenom.innerText.length; i++){
         if(result[i] === '_'){
             let lettre = alphabet.sansAccent(prenom.innerText[i])
-            if (lettre === l.toLowerCase()){
+            if (lettre === l.toLowerCase() || lettre === l){
                 result[i] = prenom.innerText[i]
-                document.getElementById(id).removeAttribute('onclick')
-                break
-            }else if (lettre === l){
-                result[i] = prenom.innerText[i]
-                document.getElementById(id).removeAttribute('onclick')
                 break
             }
         }
@@ -117,19 +115,15 @@ function row() {
 }
 
 //Valide le résultat final
-function validation(p) {
-    let l = document.getElementsByClassName('lettre')
+function validation() {
     let result = resultat.innerText.replace(/ /gi, '').split("")
     if(result.indexOf('_') === -1) {
         sucses.style.display = 'block'
         resultat.style.display = 'none'
-        for (let i = 0; i < l.length; i++){
-            l[i].removeAttribute('onclick')
-        }
     }
 }
 
-//rajout du prenom daans l'alphabet
+//rajout du prenom dans l'alphabet
 function addPrenom(p){
     let alpha = alphabet.alpha
     let rajout = ''

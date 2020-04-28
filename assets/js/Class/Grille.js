@@ -3,9 +3,14 @@ import Alphabet from "./Alphabet.js";
 export default class Grille extends Alphabet{
 
     _alphaDouble
+    _rotate
+    _grille;
 
-    constructor() {
+    constructor(grille, grille_lettre) {
         super();
+        this._grille = grille;
+        this._grille_lettre = grille_lettre;
+
     }
 
     /**
@@ -71,19 +76,38 @@ export default class Grille extends Alphabet{
      * Actions quand click sur lettre de la grille
      */
     select(e, objectif) {
-        let classDiv = e.classList;
-        if (this.sansAccent(objectif.innerText.toLowerCase()).split("").indexOf(e.innerText.toLowerCase()) !== -1) {
-            if (classDiv.contains('selected') === true){
-                classDiv.remove('selected');
+        if (e.classList.contains('lettre')){
+            let classDiv = e.classList;
+            if (this.sansAccent(objectif.innerText.toLowerCase()).split("").indexOf(e.innerText.toLowerCase()) !== -1) {
+                if (classDiv.contains('selected') === true){
+                    classDiv.remove('selected');
+                }else{
+                    classDiv.add('selected');
+                    return true
+                }
             }else{
-                classDiv.add('selected');
+                classDiv.add('error');
+                setTimeout(function(){
+                    classDiv.remove('error');
+                }, 2000)
             }
-        }else{
-            classDiv.add('error');
-            setTimeout(function(){
-                classDiv.remove('error');
-            }, 2000)
         }
+    }
+
+    centrageLettre(lettre, grille){
+        lettre.style.top = grille.offsetTop + ((grille.offsetHeight - lettre.offsetHeight)/2) + "px"
+        lettre.style.left = grille.offsetLeft + ((grille.offsetWidth - lettre.offsetWidth)/2) + "px"
+    }
+
+    rotateOn(lettre, grille){
+        this._rotate = setInterval(function () {
+            lettre.style.top = grille.offsetTop + ((grille.offsetHeight - lettre.offsetHeight)/2) + "px"
+            lettre.style.left = grille.offsetLeft + ((grille.offsetWidth - lettre.offsetWidth)/2) + "px"
+        }, 10)
+    }
+
+    rotateOff(){
+        clearInterval(this.rotate)
     }
 
     get alphaDouble() {
@@ -94,4 +118,27 @@ export default class Grille extends Alphabet{
         this._alphaDouble = value;
     }
 
+    get rotate() {
+        return this._rotate;
+    }
+
+    set rotate(value) {
+        this._rotate = value;
+    }
+
+    get grille() {
+        return this._grille;
+    }
+
+    set grille(value) {
+        this._grille = value;
+    }
+
+    get grille_lettre() {
+        return this._grille_lettre;
+    }
+
+    set grille_lettre(value) {
+        this._grille_lettre = value;
+    }
 }

@@ -11,7 +11,7 @@ let grille = document.getElementById('grille')
 let grille_lettre = document.getElementById('grille_lettre')
 let lettre = document.getElementById('lettre')
 let start = false
-let chrono = new Chrono(course, route, snail, laitue, success)
+let chrono = new Chrono(course, route, snail, laitue, success, lettre)
 let objGrille = new Grille()
 
 document.onkeydown = function (event)
@@ -23,12 +23,15 @@ document.onkeydown = function (event)
         }else{
             alert("la saisie n'est pas un nombre : " + difficult)
         }
+    } else {
+        chrono.stop()
     }
 }
 
 //redimenssionement des elements avec la taille de la fenètre
 window.onresize = function () {
     chrono.resize(course, route)
+    objGrille.centrageLettre(document.getElementsByClassName('selected')[0], grille)
 }
 
 //action du bouton
@@ -38,6 +41,7 @@ btn_debut.onclick = function(){
         course.style.display = 'block'
     }else{
         if (start === false){
+            lettre.style.display = 'block'
             course.style.display = 'block'
             grille_lettre.style.display = 'block'
             grille.style.width = route.offsetWidth + "px"
@@ -50,9 +54,9 @@ btn_debut.onclick = function(){
             btn_debut.innerText = 'Lettre suivante'
         }else{
             objGrille.removeLetter()
-            chrono.reset()
             let alphabet = objGrille.doubleAlphabet()
             objGrille.fill(alphabet,Math.ceil(alphabet.length/6),grille, 6)
+            chrono.reset()
             chrono.start()
         }
     }
@@ -61,7 +65,15 @@ btn_debut.onclick = function(){
 //Action click sur la grille
 grille.addEventListener('click', function(e){
     let lettreSelect = e.target
-    objGrille.select(lettreSelect, lettre)
+    let controle = objGrille.select(lettreSelect, lettre)
+    if (controle === true){
+        objGrille.rotateOn(lettreSelect, grille)
+        chrono.stop('GAGNE')
+        chrono.resize(course, route)
+    }
+    e.target.ontransitionend = function () {
+            objGrille.rotateOff()
+    }
 })
 
 
