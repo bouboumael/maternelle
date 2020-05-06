@@ -1,4 +1,6 @@
-export default class Chrono {
+import Grille from "./Grille.js";
+
+export default class Chrono{
 
     _largeur
     _distance
@@ -6,6 +8,8 @@ export default class Chrono {
     _debut
     _timer
     _reduct
+    _jump
+    _lose
 
     constructor(course, route, snail, laitue, success, objectif) {
         this._course = course
@@ -17,6 +21,7 @@ export default class Chrono {
         this._position = 0
         this._time = 15
         this._ms = 10
+        this._lose = false
     }
 
     /**
@@ -99,6 +104,10 @@ export default class Chrono {
             this.snail.style.visibility = 'visible'
         }
         if (this.position > this.largeur - this.snail.clientWidth){
+            this.resultat('PERDU')
+            this.animeLose(document.querySelectorAll('.lettre'))
+            this.laitueDimension(true)
+            this.lose = true
             this.stop()
             this.laitue.classList.add('finish')
             this.reduct = setInterval(function (){
@@ -106,10 +115,10 @@ export default class Chrono {
                     this.laitueDimension(false)
                 }else{
                     clearInterval(this.reduct)
-                    this.resultat('PERDU')
                 }
             }.bind(this),100)
         }else{
+            this.lose = false
             this.snail.style.left = this.positionLeft('snail')
             this.position = this.position + this.pourcent
         }
@@ -133,6 +142,43 @@ export default class Chrono {
             this.laitue.style.top = this.course.offsetTop + ((this.route.height-this.laitue.height)/2) + "px"
             this.laitue.style.left = this.positionLeft('laitue')
         }
+    }
+
+    /**
+     * Animation de sautt de la laitue
+     */
+    laitueJump(laitueTop, routeTop){
+        let jumpUp = routeTop
+        let laituePosition = laitueTop
+        let jump = laituePosition - jumpUp
+        let pixeltop = (this.ms*jump)/500
+        let up = true
+        let nb = 0
+        this.jump = setInterval(function () {
+            if (up === true) {
+                laituePosition = laituePosition - pixeltop
+                this.laitue.style.top = laituePosition + "px"
+                if (this.laitue.offsetTop < routeTop) {
+                    up = false
+                    nb++
+                }
+            }else{
+                laituePosition = laituePosition + pixeltop
+                this.laitue.style.top = laituePosition + "px"
+                if (this.laitue.offsetTop > laitueTop) {
+                    up = true
+                    nb++
+                }
+            }
+            if (nb === 10){
+                this.laitueJumpStop()
+            }
+            console.log(nb, up)
+        }.bind(this), this.ms)
+    }
+
+    laitueJumpStop(){
+        clearInterval(this.jump)
     }
 
     /**
@@ -162,6 +208,24 @@ export default class Chrono {
 
         return left
 
+    }
+
+    animeLose (selectors){
+        let grille = new Grille()
+        selectors.forEach((div) => {
+            if (div.innerText.toLowerCase() === this.objectif.innerText.toLowerCase()){
+                div.classList.add('selected')
+                div.style.backgroundColor = "red"
+                grille.rotateOn(div, document.getElementById('grille'))
+                let i = 1
+                div.ontransitionend = function () {
+                    if (i > 2){
+                        grille.rotateOff()
+                    }
+                    i++
+                }
+            }
+        })
     }
 
     get course() {
@@ -282,5 +346,22 @@ export default class Chrono {
 
     set objectif(value) {
         this._objectif = value;
+    }
+
+
+    get jump() {
+        return this._jump;
+    }
+
+    set jump(value) {
+        this._jump = value;
+    }
+
+    get lose() {
+        return this._lose;
+    }
+
+    set lose(value) {
+        this._lose = value;
     }
 }

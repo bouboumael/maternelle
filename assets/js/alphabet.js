@@ -1,5 +1,6 @@
 import Chrono from "./Class/Chrono.js";
 import Grille from "./Class/Grille.js";
+import Alphabet from "./Class/Alphabet.js";
 
 let snail = document.getElementById('snail')
 let route = document.getElementById('route')
@@ -11,8 +12,10 @@ let grille = document.getElementById('grille')
 let grille_lettre = document.getElementById('grille_lettre')
 let lettre = document.getElementById('lettre')
 let start = false
+let win = false
 let chrono = new Chrono(course, route, snail, laitue, success, lettre)
 let objGrille = new Grille()
+let alpha = new Alphabet()
 
 document.onkeydown = function (event)
 {
@@ -23,9 +26,9 @@ document.onkeydown = function (event)
         }else{
             alert("la saisie n'est pas un nombre : " + difficult)
         }
-    } else {
+    } /*else {
         chrono.stop()
-    }
+    }*/
 }
 
 //redimenssionement des elements avec la taille de la fenètre
@@ -42,10 +45,11 @@ btn_debut.onclick = function(){
     }else{
         if (start === false){
             lettre.style.display = 'block'
+            lettre.innerText = alpha.letter().toUpperCase()
             course.style.display = 'block'
             grille_lettre.style.display = 'block'
             grille.style.width = route.offsetWidth + "px"
-            let alphabet = objGrille.doubleAlphabet()
+            let alphabet = objGrille.doubleAlphabet(lettre.innerText.toLowerCase())
             objGrille.fill(alphabet,Math.ceil(alphabet.length/6),grille)
             if (course.style.display === 'block'){
                 chrono.start()
@@ -54,8 +58,11 @@ btn_debut.onclick = function(){
             btn_debut.innerText = 'Lettre suivante'
         }else{
             objGrille.removeLetter()
-            let alphabet = objGrille.doubleAlphabet()
+            lettre.innerText = alpha.letter().toUpperCase()
+            let alphabet = objGrille.doubleAlphabet(lettre.innerText.toLowerCase())
             objGrille.fill(alphabet,Math.ceil(alphabet.length/6),grille, 6)
+            win = false
+            chrono.laitueJumpStop()
             chrono.reset()
             chrono.start()
         }
@@ -64,16 +71,20 @@ btn_debut.onclick = function(){
 
 //Action click sur la grille
 grille.addEventListener('click', function(e){
-    let lettreSelect = e.target
-    let controle = objGrille.select(lettreSelect, lettre)
-    if (controle === true){
-        objGrille.rotateOn(lettreSelect, grille)
-        chrono.stop('GAGNE')
-        chrono.resize(course, route)
-    }
-    e.target.ontransitionend = function () {
+    if (chrono.lose === false){
+        if (win === false){
+            let lettreSelect = e.target
+            let controle = objGrille.select(lettreSelect, lettre)
+            if (controle === true){
+                objGrille.rotateOn(lettreSelect, grille)
+                chrono.stop('GAGNE')
+                chrono.resize(course, route)
+                win = true
+                chrono.laitueJump(laitue.offsetTop, route.offsetTop)
+            }
+        }
+        e.target.ontransitionend = function () {
             objGrille.rotateOff()
+        }
     }
 })
-
-

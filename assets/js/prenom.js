@@ -20,7 +20,7 @@ prenom.innerText = controle(eleves[Math.floor(Math.random()*eleves.length)])
 row()
 resultat.innerHTML = trait(prenom.innerText, false)
 
-bouton.onclick = function () {
+bouton.addEventListener('click', function () {
     if (sucses.style.display === 'block'){
         sucses.style.display = 'none'
         resultat.style.display = 'block'
@@ -33,7 +33,7 @@ bouton.onclick = function () {
     prenom.innerText = p
     row()
     resultat.innerHTML = trait(prenom.innerText, false)
-}
+})
 
 grille_lettre.addEventListener('click', function(e){
     let lettreSelect = e.target
@@ -110,6 +110,7 @@ function controleLettre(l) {
 
 //insertion des lettre de l'alphabet dans la grille
 function row() {
+    grille_lettre.style.display = 'block'
     let alpha = alphabet.shuffle(addPrenom(alphabet.sansAccent(prenom.innerText.toLowerCase())).split(""))
     grille.fill(alpha,Math.ceil(alpha.length/6),grille_lettre)
 }

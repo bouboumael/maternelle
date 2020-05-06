@@ -49,21 +49,26 @@ export default class Grille extends Alphabet{
      * Mélange la lettre dans 2 alphabets dont 1 tronqué
      * @returns {*}
      */
-    doubleAlphabet(){
-        let lettre = "a"
-        this.alphaDouble = this.shuffle((this.alpha + this.alpha.substring(0,23)).split(""))
-        let nb = 1
+    doubleAlphabet(l){
+        let a = this.alpha.split("")
+        while (a.indexOf(l) > -1){
+            a.splice(a.indexOf(l), 1)
+        }
+        this.alphaDouble = this.shuffle((this.alpha.concat(a.join().replace(/,/gi,'').substring(0,22))).split(""))
+        let nb = 0
         for (let i = 0; i <= this.alphaDouble.length; i++){
-            if (nb === 1 && this.alphaDouble[i] === lettre){
-                this.alphaDouble.splice(this.alphaDouble.indexOf(lettre), 1)
-                nb--
+            if (this.alphaDouble[i] === l){
+                nb++
+                if (nb > 1){
+                    this.alphaDouble.splice(this.alphaDouble.indexOf(l), 1)
+                }
             }
         }
         return this.alphaDouble
     }
 
     /**
-     * SSupprime les lettres de la grille
+     * Supprime les lettres de la grille
      */
     removeLetter(){
         let elements = document.querySelectorAll('.ligne-lettre');
@@ -94,11 +99,21 @@ export default class Grille extends Alphabet{
         }
     }
 
+    /**
+     * centre la bonne lettre quand win
+     * @param lettre
+     * @param grille
+     */
     centrageLettre(lettre, grille){
         lettre.style.top = grille.offsetTop + ((grille.offsetHeight - lettre.offsetHeight)/2) + "px"
         lettre.style.left = grille.offsetLeft + ((grille.offsetWidth - lettre.offsetWidth)/2) + "px"
     }
 
+    /**
+     * animation de rotation avec centrage
+     * @param lettre
+     * @param grille
+     */
     rotateOn(lettre, grille){
         this._rotate = setInterval(function () {
             lettre.style.top = grille.offsetTop + ((grille.offsetHeight - lettre.offsetHeight)/2) + "px"
@@ -106,6 +121,9 @@ export default class Grille extends Alphabet{
         }, 10)
     }
 
+    /**
+     * fin de rotation
+     */
     rotateOff(){
         clearInterval(this.rotate)
     }
