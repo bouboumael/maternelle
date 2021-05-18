@@ -1,5 +1,7 @@
 Bonjour,
 
+Lancer le jeu sur un server type liveserver (vscode)
+
 Afin d'adapter les prénoms de votre classe à cette application, veuillez :
 
 	1) Ouvrir le fichier "prenoms.txt" qui se trouve dans le repertoire "pages"
